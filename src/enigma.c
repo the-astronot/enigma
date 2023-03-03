@@ -27,7 +27,7 @@
 #define MINIMUM_ROTORS 3
 #define MAXIMUM_ROTORS 8
 #define TERM_WIDTH 80
-#define MSGLENGTH 2048
+#define MSGLENGTH 4096
 #define BUFFSZ 1024
 
 
@@ -458,6 +458,7 @@ void help() {
 	printf("\t-P\t\tenter plugboard pairs in CSL\n");
 	printf("\t-R\t\tenter rotors(L->R) in CSL\n");
 	printf("\t-L\t\tenter reflector choice\n");
+	printf("\t-S\t\tenter the starting characters(L->R) in CSL\n");
 
 	printf("\n");
 }
@@ -467,8 +468,7 @@ int main(int argc, char** argv) {
 	// SETUP
 	int ROTOR, PLUGBOARD, REFLECTOR, SETTINGS, VERBOSE;
 	int num_rotors, num_reflectors;
-	//char buffer[1024];
-	char msg[2048];
+	char msg[MSGLENGTH];
 	reflector_t* reflectors = calloc(1,sizeof(reflector_t));
 	rotor_t* rotors = calloc(1,sizeof(rotor_t));
 	int alphabet[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25};
@@ -506,7 +506,6 @@ int main(int argc, char** argv) {
 			}
 		} else if (strcmp("-S",argv[i])==0) {
 			i++;
-
 			SETTINGS = enter_setting_input(&enigma,rotors,num_rotors,argv[i]);
 			if (SETTINGS == SET) {
 				printf("SETTINGS ACCEPTED\n");
